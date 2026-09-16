@@ -119,7 +119,7 @@ export function StatisticsPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#FAF9F6] text-stone-900">
+        <div className="relative z-10 min-h-screen text-stone-900">
             <AppNavigation />
             <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6">
                 {/* Header */}

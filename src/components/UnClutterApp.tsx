@@ -216,7 +216,7 @@ export function UnClutterApp() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF9F6] text-stone-900 selection:bg-stone-200">
+    <div className="relative z-10 min-h-screen flex flex-col text-stone-900 selection:bg-stone-200">
       <AppNavigation />
       {/* Top Navigation */}
       <header className="sticky top-0 z-30 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-stone-200/70">
