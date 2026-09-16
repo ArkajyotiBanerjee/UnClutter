@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { AppNavigation } from "@/components/AppNavigation";
 import {
   Search,
   Plus,
@@ -216,6 +217,7 @@ export function UnClutterApp() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F6] text-stone-900 selection:bg-stone-200">
+      <AppNavigation />
       {/* Top Navigation */}
       <header className="sticky top-0 z-30 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-stone-200/70">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
