@@ -216,35 +216,36 @@ export function UnClutterApp() {
   };
 
   return (
-    <div className="relative z-10 min-h-screen flex flex-col text-stone-900 selection:bg-stone-200">
+    <div className="relative z-10 min-h-screen flex flex-col text-stone-900 selection:bg-amber-300">
       <AppNavigation />
-      {/* Top Navigation */}
-      <header className="sticky top-0 z-30 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-stone-200/70">
+
+      {/* Top Navigation Bar */}
+      <header className="sticky top-0 z-30 bg-amber-50/90 backdrop-blur-md border-b-2 border-stone-900 shadow-[0_2px_0px_#1c1917]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           {/* Logo & Subtitle */}
-          <div className="flex items-center gap-2.5 shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-stone-900 flex items-center justify-center text-white font-semibold text-sm shadow-xs">
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-stone-900 border-2 border-stone-900 flex items-center justify-center text-amber-300 font-black text-base shadow-[2px_2px_0px_#1c1917]">
               U
             </div>
             <div>
-              <span className="font-semibold text-base tracking-tight text-stone-900 block leading-tight">
+              <span className="font-black text-lg tracking-tight text-stone-900 block leading-none">
                 UnClutter
               </span>
-              <span className="text-[10px] text-stone-500 block leading-tight font-normal">
-                Focused Student Tasks
+              <span className="text-[10px] text-stone-600 block leading-tight font-bold tracking-wide uppercase mt-0.5">
+                Student Task Flow
               </span>
             </div>
           </div>
 
           {/* Search bar */}
           <div className="flex-1 max-w-xs relative hidden sm:block">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 stroke-[2.5]" />
             <input
               type="text"
               placeholder="Search tasks..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-stone-400 focus:border-stone-400 placeholder:text-stone-400 text-stone-800 transition-all"
+              className="w-full pl-9 pr-3 py-1.5 text-xs font-bold bg-white border-2 border-stone-900 rounded-xl shadow-[2px_2px_0px_#1c1917] focus:outline-none focus:bg-amber-50 focus:shadow-[3px_3px_0px_#1c1917] placeholder:text-stone-400 text-stone-900 transition-all"
             />
           </div>
 
@@ -253,19 +254,19 @@ export function UnClutterApp() {
             {isAuthenticated ? (
               <div className="flex items-center gap-3">
                 <div className="text-right hidden sm:block">
-                  <span className="block text-xs font-medium text-stone-800 leading-tight">
+                  <span className="block text-xs font-black text-stone-900 leading-tight">
                     {session?.user?.name || "Student"}
                   </span>
-                  <span className="block text-[10px] text-emerald-600 font-normal leading-tight">
-                    Syncing to Cloud
+                  <span className="block text-[10px] text-emerald-700 font-bold uppercase tracking-wider leading-tight">
+                    • Cloud Synced
                   </span>
                 </div>
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
                   title="Sign out"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50 rounded-lg border border-stone-200/80 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-stone-900 bg-white hover:bg-stone-100 rounded-xl border-2 border-stone-900 shadow-[2px_2px_0px_#1c1917] hover:shadow-[3px_3px_0px_#1c1917] active:translate-x-0.5 active:translate-y-0.5 transition-all"
                 >
-                  <LogOut className="w-3.5 h-3.5 text-stone-400" />
+                  <LogOut className="w-3.5 h-3.5 text-stone-700 stroke-[2.5]" />
                   <span className="hidden sm:inline">Sign out</span>
                 </button>
               </div>
@@ -273,9 +274,9 @@ export function UnClutterApp() {
               <button
                 type="button"
                 onClick={() => signIn("google", { callbackUrl: "/" })}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-700 hover:text-stone-900 bg-white hover:bg-stone-100 rounded-lg border border-stone-200 shadow-2xs transition-colors"
+                className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-black text-stone-900 bg-amber-300 hover:bg-amber-200 rounded-xl border-2 border-stone-900 shadow-[3px_3px_0px_#1c1917] hover:shadow-[4px_4px_0px_#1c1917] active:translate-x-0.5 active:translate-y-0.5 transition-all"
               >
-                <LogIn className="w-3.5 h-3.5 text-stone-500" />
+                <LogIn className="w-3.5 h-3.5 text-stone-900 stroke-[2.5]" />
                 <span>Sign in with Google</span>
               </button>
             )}
@@ -286,80 +287,84 @@ export function UnClutterApp() {
       {/* Main Content Area */}
       <main className="max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 flex-1 flex flex-col">
         {/* Context Greeting & Main Action */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-7 bg-white p-5 rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917]">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-stone-900">
+            <div className="flex items-center gap-2">
+              <span className="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 border border-stone-900" />
+              <h1 className="text-xl sm:text-2xl font-black tracking-tight text-stone-900">
+                {isAuthenticated
+                  ? `Welcome, ${session?.user?.name?.split(" ")[0] || "Student"}`
+                  : "Welcome to UnClutter"}
+              </h1>
+            </div>
+            <p className="text-xs font-medium text-stone-600 mt-1 pl-4.5">
               {isAuthenticated
-                ? `Welcome back, ${session?.user?.name?.split(" ")[0] || "Student"}`
-                : "Welcome to UnClutter"}
-            </h1>
-            <p className="text-xs text-stone-500 mt-0.5">
-              {isAuthenticated
-                ? "Your tasks are saved securely to your account."
-                : "Using guest mode. Your tasks are saved locally on this browser."}
+                ? "Your tasks are actively persisted to your cloud account."
+                : "Guest Mode active. All tasks are saved locally on this browser."}
             </p>
           </div>
 
           <button
             onClick={openCreateModal}
-            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 text-xs font-medium text-white bg-stone-900 hover:bg-stone-800 rounded-lg shadow-xs transition-colors self-start sm:self-auto"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-stone-900 bg-amber-400 hover:bg-amber-300 rounded-xl border-2 border-stone-900 shadow-[3px_3px_0px_#1c1917] hover:shadow-[4px_4px_0px_#1c1917] active:translate-x-0.5 active:translate-y-0.5 transition-all self-start sm:self-auto"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 stroke-[3]" />
             <span>Add Task</span>
           </button>
         </div>
 
         {/* Search for Mobile */}
         <div className="relative mb-6 sm:hidden">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 stroke-[2.5]" />
           <input
             type="text"
             placeholder="Search tasks..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-8 pr-3 py-2 text-xs bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-stone-400 text-stone-800"
+            className="w-full pl-9 pr-3 py-2 text-xs font-bold bg-white border-2 border-stone-900 rounded-xl shadow-[2px_2px_0px_#1c1917] focus:outline-none focus:bg-amber-50 text-stone-900"
           />
         </div>
 
-        {/* 3 Compact Stat Cards */}
-        <div className="grid grid-cols-3 gap-3 mb-8">
-          <div className="bg-white p-3.5 rounded-xl border border-stone-200/80 flex flex-col">
-            <div className="flex items-center gap-1.5 text-stone-500 mb-1">
-              <ListTodo className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-medium uppercase tracking-wider">Total</span>
+        {/* 3 Compact Neo-Brutalist Stat Cards */}
+        <div className="grid grid-cols-3 gap-3.5 mb-8">
+          <div className="bg-white p-4 rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917] flex flex-col">
+            <div className="flex items-center gap-1.5 text-stone-700 mb-1">
+              <ListTodo className="w-4 h-4 stroke-[2.5]" />
+              <span className="text-[10px] font-black uppercase tracking-wider">Total</span>
             </div>
-            <span className="text-xl font-bold text-stone-900">{stats.total}</span>
+            <span className="text-2xl sm:text-3xl font-black text-stone-900">{stats.total}</span>
           </div>
 
-          <div className="bg-white p-3.5 rounded-xl border border-stone-200/80 flex flex-col">
-            <div className="flex items-center gap-1.5 text-amber-600 mb-1">
-              <Clock className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-medium uppercase tracking-wider">Pending</span>
+          <div className="bg-amber-50 p-4 rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917] flex flex-col">
+            <div className="flex items-center gap-1.5 text-amber-900 mb-1">
+              <Clock className="w-4 h-4 stroke-[2.5]" />
+              <span className="text-[10px] font-black uppercase tracking-wider">Pending</span>
             </div>
-            <span className="text-xl font-bold text-stone-900">{stats.pending}</span>
+            <span className="text-2xl sm:text-3xl font-black text-stone-900">{stats.pending}</span>
           </div>
 
-          <div className="bg-white p-3.5 rounded-xl border border-stone-200/80 flex flex-col">
-            <div className="flex items-center gap-1.5 text-emerald-600 mb-1">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-medium uppercase tracking-wider">Completed</span>
+          <div className="bg-emerald-50 p-4 rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917] flex flex-col">
+            <div className="flex items-center gap-1.5 text-emerald-900 mb-1">
+              <CheckCircle2 className="w-4 h-4 stroke-[2.5]" />
+              <span className="text-[10px] font-black uppercase tracking-wider">Done</span>
             </div>
-            <span className="text-xl font-bold text-stone-900">{stats.completed}</span>
+            <span className="text-2xl sm:text-3xl font-black text-stone-900">{stats.completed}</span>
           </div>
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-stone-200/60">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5 pb-3 border-b-2 border-stone-900/40">
           {/* Tabs */}
-          <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-lg border border-stone-200/70">
+          <div className="flex items-center gap-1.5 bg-stone-200/80 p-1.5 rounded-xl border-2 border-stone-900 shadow-[2px_2px_0px_#1c1917]">
             {(["ALL", "PENDING", "COMPLETED"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${activeTab === tab
-                  ? "bg-white text-stone-900 shadow-2xs"
-                  : "text-stone-500 hover:text-stone-800"
-                  }`}
+                className={`px-3.5 py-1 text-xs font-black uppercase tracking-wider rounded-lg border-2 transition-all ${
+                  activeTab === tab
+                    ? "bg-amber-300 text-stone-900 border-stone-900 shadow-[2px_2px_0px_#1c1917]"
+                    : "border-transparent text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                }`}
               >
                 {tab === "ALL" ? "All" : tab === "PENDING" ? "Pending" : "Completed"}
               </button>
@@ -368,14 +373,14 @@ export function UnClutterApp() {
 
           {/* Priority Filter */}
           <div className="flex items-center gap-2 self-end sm:self-auto">
-            <span className="text-xs text-stone-400 flex items-center gap-1">
-              <SlidersHorizontal className="w-3 h-3" />
+            <span className="text-xs font-black uppercase tracking-wider text-stone-700 flex items-center gap-1">
+              <SlidersHorizontal className="w-3.5 h-3.5 stroke-[2.5]" />
               Priority:
             </span>
             <select
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value as Priority | "ALL")}
-              className="text-xs bg-white border border-stone-200 rounded-lg px-2.5 py-1 text-stone-700 focus:outline-none focus:ring-1 focus:ring-stone-400"
+              className="text-xs font-bold bg-white border-2 border-stone-900 rounded-xl px-3 py-1.5 text-stone-900 shadow-[2px_2px_0px_#1c1917] focus:outline-none focus:bg-amber-50"
             >
               <option value="ALL">All Priorities</option>
               <option value="HIGH">High Priority</option>
@@ -387,40 +392,40 @@ export function UnClutterApp() {
 
         {/* Global Error Notice */}
         {error && (
-          <div className="mb-4 flex items-center justify-between p-3.5 text-xs text-rose-700 bg-rose-50 border border-rose-100 rounded-xl">
-            <div className="flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0" />
+          <div className="mb-5 flex items-center justify-between p-4 text-xs font-bold text-rose-900 bg-rose-100 border-2 border-stone-900 rounded-2xl shadow-[3px_3px_0px_#1c1917]">
+            <div className="flex items-center gap-2.5">
+              <AlertCircle className="w-5 h-5 shrink-0 stroke-[2.5]" />
               <span>{error}</span>
             </div>
             <button
               onClick={loadTasks}
-              className="inline-flex items-center gap-1 font-medium underline hover:text-rose-900"
+              className="inline-flex items-center gap-1.5 font-black uppercase underline hover:text-rose-950"
             >
-              <RefreshCw className="w-3 h-3" /> Retry
+              <RefreshCw className="w-3.5 h-3.5 stroke-[2.5]" /> Retry
             </button>
           </div>
         )}
 
         {/* Task List / States */}
-        <div className="flex-1 space-y-2.5">
+        <div className="flex-1 space-y-3">
           {isLoading ? (
             /* Loading State */
-            <div className="py-16 text-center space-y-3">
-              <RefreshCw className="w-5 h-5 text-stone-400 animate-spin mx-auto" />
-              <p className="text-xs text-stone-500">Loading your tasks...</p>
+            <div className="py-20 text-center space-y-3 bg-white/80 rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917]">
+              <RefreshCw className="w-6 h-6 text-stone-900 animate-spin mx-auto stroke-[2.5]" />
+              <p className="text-xs font-bold uppercase tracking-wider text-stone-600">Loading tasks...</p>
             </div>
           ) : filteredTasks.length === 0 ? (
             /* Empty State */
-            <div className="py-16 text-center rounded-2xl border border-dashed border-stone-200 bg-white/50 p-8">
-              <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 mx-auto mb-3">
-                <CheckCircle2 className="w-5 h-5 stroke-[1.5]" />
+            <div className="py-16 text-center rounded-2xl border-2 border-dashed border-stone-900 bg-white/80 p-8 shadow-[4px_4px_0px_#1c1917]">
+              <div className="w-12 h-12 rounded-2xl bg-amber-300 border-2 border-stone-900 flex items-center justify-center text-stone-900 shadow-[2px_2px_0px_#1c1917] mx-auto mb-3.5">
+                <CheckCircle2 className="w-6 h-6 stroke-[2.5]" />
               </div>
-              <h3 className="text-sm font-semibold text-stone-800">
+              <h3 className="text-base font-black text-stone-900">
                 {searchQuery || priorityFilter !== "ALL" || activeTab !== "ALL"
-                  ? "No tasks match your filters"
-                  : "All clear! No tasks on your list"}
+                  ? "No tasks match your filter criteria"
+                  : "Desk is Clear! No tasks on your list"}
               </h3>
-              <p className="text-xs text-stone-500 mt-1 max-w-xs mx-auto">
+              <p className="text-xs font-medium text-stone-600 mt-1 max-w-sm mx-auto">
                 {searchQuery || priorityFilter !== "ALL" || activeTab !== "ALL"
                   ? "Try resetting your search query or adjusting your priority filters."
                   : "Capture assignments, deadlines, and study goals in one uncluttered space."}
@@ -428,9 +433,9 @@ export function UnClutterApp() {
               {!searchQuery && priorityFilter === "ALL" && activeTab === "ALL" && (
                 <button
                   onClick={openCreateModal}
-                  className="mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-white bg-stone-900 hover:bg-stone-800 rounded-lg shadow-xs transition-colors"
+                  className="mt-5 inline-flex items-center gap-1.5 px-4 py-2 text-xs font-black uppercase tracking-wider text-stone-900 bg-amber-400 hover:bg-amber-300 rounded-xl border-2 border-stone-900 shadow-[3px_3px_0px_#1c1917] hover:shadow-[4px_4px_0px_#1c1917] active:translate-x-0.5 active:translate-y-0.5 transition-all"
                 >
-                  <Plus className="w-3.5 h-3.5" />
+                  <Plus className="w-4 h-4 stroke-[3]" />
                   Create First Task
                 </button>
               )}

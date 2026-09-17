@@ -102,39 +102,43 @@ export function TaskModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-xs">
       <div
-        className="w-full max-w-lg bg-white rounded-xl shadow-xl border border-stone-200 overflow-hidden"
+        className="w-full max-w-lg bg-[#FFFDF8] rounded-2xl border-3 border-stone-900 shadow-[6px_6px_0px_#1c1917] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100">
-          <h2 className="text-base font-semibold text-stone-900">
-            {initialTask ? "Edit Task" : "New Task"}
-          </h2>
+        <div className="flex items-center justify-between px-6 py-4 bg-white border-b-2 border-stone-900">
+          <div className="flex items-center gap-2">
+            <span className="flex h-3 w-3 rounded-full border border-stone-900 bg-amber-400" />
+            <h2 className="text-base font-black text-stone-900 tracking-tight">
+              {initialTask ? "Edit Task" : "Create New Task"}
+            </h2>
+          </div>
 
           <button
             onClick={onClose}
             disabled={isSubmitting}
-            className="text-stone-400 hover:text-stone-600 p-1 rounded-md hover:bg-stone-100 transition-colors"
+            className="p-1 rounded-lg border-2 border-transparent text-stone-600 hover:border-stone-900 hover:bg-rose-100 hover:text-rose-900 transition-all"
+            aria-label="Close dialog"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5 stroke-[2.5]" />
           </button>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {error && (
-            <div className="flex items-center gap-2 p-3 text-xs text-rose-700 bg-rose-50 rounded-lg border border-rose-100">
-              <AlertCircle className="w-4 h-4 shrink-0" />
+            <div className="flex items-center gap-2 p-3 text-xs font-bold text-rose-900 bg-rose-100 rounded-xl border-2 border-stone-900 shadow-[2px_2px_0px_#1c1917]">
+              <AlertCircle className="w-4 h-4 shrink-0 stroke-[2.5]" />
               <span>{error}</span>
             </div>
           )}
 
           {/* Title */}
           <div>
-            <label className="block text-xs font-medium text-stone-700 mb-1">
-              Title <span className="text-rose-500">*</span>
+            <label className="block text-xs font-black uppercase tracking-wider text-stone-900 mb-1.5">
+              Task Title <span className="text-rose-600">*</span>
             </label>
 
             <input
@@ -144,23 +148,23 @@ export function TaskModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Complete Chapter 4 Physics Assignment"
-              className="w-full px-3 py-2 text-sm bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-stone-400 transition-all placeholder:text-stone-400"
+              className="w-full px-3.5 py-2.5 text-sm font-bold bg-white border-2 border-stone-900 rounded-xl shadow-[2px_2px_0px_#1c1917] focus:outline-none focus:bg-amber-50 focus:shadow-[4px_4px_0px_#1c1917] transition-all placeholder:text-stone-400 text-stone-900"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-medium text-stone-700 mb-1">
+            <label className="block text-xs font-black uppercase tracking-wider text-stone-900 mb-1.5">
               Description{" "}
-              <span className="text-stone-400 font-normal">(optional)</span>
+              <span className="text-stone-500 font-normal lowercase">(optional)</span>
             </label>
 
             <textarea
               rows={3}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Add details, links, or notes..."
-              className="w-full px-3 py-2 text-sm bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-stone-400 transition-all placeholder:text-stone-400 resize-none"
+              placeholder="Add notes, key links, study points..."
+              className="w-full px-3.5 py-2.5 text-sm font-medium bg-white border-2 border-stone-900 rounded-xl shadow-[2px_2px_0px_#1c1917] focus:outline-none focus:bg-amber-50 focus:shadow-[4px_4px_0px_#1c1917] transition-all placeholder:text-stone-400 text-stone-900 resize-none"
             />
           </div>
 
@@ -168,23 +172,23 @@ export function TaskModal({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Priority */}
             <div>
-              <label className="block text-xs font-medium text-stone-700 mb-1">
+              <label className="block text-xs font-black uppercase tracking-wider text-stone-900 mb-1.5">
                 Priority
               </label>
 
-              <div className="grid grid-cols-3 gap-1.5 p-1 bg-stone-100 rounded-lg border border-stone-200/60">
+              <div className="grid grid-cols-3 gap-1.5 p-1 bg-white rounded-xl border-2 border-stone-900 shadow-[2px_2px_0px_#1c1917]">
                 {(["LOW", "MEDIUM", "HIGH"] as Priority[]).map((p) => (
                   <button
                     key={p}
                     type="button"
                     onClick={() => setPriority(p)}
-                    className={`py-1 text-xs font-medium rounded-md transition-all ${priority === p
-                        ? p === "HIGH"
-                          ? "bg-rose-500 text-white shadow-xs"
-                          : p === "MEDIUM"
-                            ? "bg-amber-500 text-white shadow-xs"
-                            : "bg-emerald-600 text-white shadow-xs"
-                        : "text-stone-600 hover:text-stone-900"
+                    className={`py-1.5 text-xs font-black uppercase tracking-wider rounded-lg border-2 transition-all ${priority === p
+                      ? p === "HIGH"
+                        ? "bg-rose-400 text-stone-900 border-stone-900 shadow-[2px_2px_0px_#1c1917]"
+                        : p === "MEDIUM"
+                          ? "bg-amber-400 text-stone-900 border-stone-900 shadow-[2px_2px_0px_#1c1917]"
+                          : "bg-emerald-400 text-stone-900 border-stone-900 shadow-[2px_2px_0px_#1c1917]"
+                      : "border-transparent text-stone-600 hover:text-stone-900 hover:bg-stone-100"
                       }`}
                   >
                     {p.charAt(0) + p.slice(1).toLowerCase()}
@@ -195,7 +199,7 @@ export function TaskModal({
 
             {/* Due Date */}
             <div>
-              <label className="block text-xs font-medium text-stone-700 mb-1">
+              <label className="block text-xs font-black uppercase tracking-wider text-stone-900 mb-1.5">
                 Due Date
               </label>
 
@@ -205,12 +209,12 @@ export function TaskModal({
                   value={dueDate}
                   min={!initialTask ? minDueDate : undefined}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-full px-3 py-1.5 text-sm bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-stone-400 text-stone-700"
+                  className="w-full px-3.5 py-2 text-sm font-bold bg-white border-2 border-stone-900 rounded-xl shadow-[2px_2px_0px_#1c1917] focus:outline-none focus:bg-amber-50 focus:shadow-[4px_4px_0px_#1c1917] text-stone-900"
                 />
               </div>
 
               {!initialTask && (
-                <p className="mt-1 text-[10px] text-stone-400">
+                <p className="mt-1 text-[10px] font-bold text-stone-500">
                   New tasks can be due today or later.
                 </p>
               )}
@@ -218,12 +222,12 @@ export function TaskModal({
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-stone-100 mt-6">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t-2 border-stone-900 mt-6">
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2 text-xs font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-lg transition-colors"
+              className="px-4 py-2 text-xs font-black uppercase tracking-wider text-stone-800 bg-white hover:bg-stone-100 border-2 border-stone-900 rounded-xl shadow-[2px_2px_0px_#1c1917] hover:shadow-[3px_3px_0px_#1c1917] active:translate-x-0.5 active:translate-y-0.5 transition-all"
             >
               Cancel
             </button>
@@ -231,7 +235,7 @@ export function TaskModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 text-xs font-medium text-white bg-stone-900 hover:bg-stone-800 disabled:opacity-50 rounded-lg shadow-xs transition-colors"
+              className="px-5 py-2 text-xs font-black uppercase tracking-wider text-stone-900 bg-amber-400 hover:bg-amber-300 disabled:opacity-50 border-2 border-stone-900 rounded-xl shadow-[3px_3px_0px_#1c1917] hover:shadow-[4px_4px_0px_#1c1917] active:translate-x-0.5 active:translate-y-0.5 transition-all"
             >
               {isSubmitting
                 ? "Saving..."

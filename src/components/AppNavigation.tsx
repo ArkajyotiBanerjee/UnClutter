@@ -23,14 +23,16 @@ export function AppNavigation() {
     return (
         <>
             {/* Desktop Navigation */}
-            <aside className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 md:block">
-                <nav className="flex w-[72px] flex-col items-center gap-2 rounded-2xl border border-stone-200/80 bg-white/90 p-2 shadow-sm backdrop-blur-md">
-                    <div className="mb-1 flex h-9 w-9 items-center justify-center rounded-xl bg-stone-900 text-sm font-semibold text-white">
+            <aside className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 md:block">
+                <nav className="flex w-[80px] flex-col items-center gap-2 rounded-2xl border-2 border-stone-900 bg-amber-50/95 p-2.5 shadow-[4px_4px_0px_#1c1917] backdrop-blur-sm">
+                    {/* Top U Logo */}
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-stone-900 bg-stone-900 text-sm font-black text-amber-300 shadow-[2px_2px_0px_#1c1917]">
                         U
                     </div>
 
-                    <div className="my-1 h-px w-8 bg-stone-200" />
+                    <div className="my-1.5 h-0.5 w-10 bg-stone-900" />
 
+                    {/* Nav links */}
                     {navigationItems.map((item) => {
                         const Icon = item.icon;
                         const isActive =
@@ -43,13 +45,13 @@ export function AppNavigation() {
                                 key={item.href}
                                 href={item.href}
                                 title={item.label}
-                                className={`flex min-h-[58px] w-14 flex-col items-center justify-center gap-1 rounded-xl px-1.5 py-2 transition-colors ${isActive
-                                    ? "bg-stone-900 text-white"
-                                    : "text-stone-400 hover:bg-stone-100 hover:text-stone-800"
+                                className={`flex min-h-[64px] w-full flex-col items-center justify-center gap-1 rounded-xl border-2 p-1.5 transition-all ${isActive
+                                    ? "border-stone-900 bg-amber-300 font-bold text-stone-900 shadow-[2px_2px_0px_#1c1917]"
+                                    : "border-transparent text-stone-600 hover:border-stone-900 hover:bg-white hover:text-stone-900"
                                     }`}
                             >
-                                <Icon className="h-4 w-4 shrink-0" strokeWidth={1.8} />
-                                <span className="w-full text-center text-[9px] font-medium leading-tight whitespace-nowrap">
+                                <Icon className="h-5 w-5 shrink-0" strokeWidth={2.2} />
+                                <span className="w-full text-center text-[10px] font-bold leading-tight tracking-tight">
                                     {item.label}
                                 </span>
                             </Link>
@@ -59,7 +61,7 @@ export function AppNavigation() {
             </aside>
 
             {/* Mobile Navigation */}
-            <nav className="fixed bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1 rounded-2xl border border-stone-200/80 bg-white/95 p-1.5 shadow-lg backdrop-blur-md md:hidden">
+            <nav className="fixed bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-2xl border-2 border-stone-900 bg-amber-50/95 p-2 shadow-[4px_4px_0px_#1c1917] backdrop-blur-md md:hidden">
                 {navigationItems.map((item) => {
                     const Icon = item.icon;
                     const isActive =
@@ -71,12 +73,12 @@ export function AppNavigation() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-medium transition-colors ${isActive
-                                ? "bg-stone-900 text-white"
-                                : "text-stone-500 hover:bg-stone-100 hover:text-stone-800"
+                            className={`flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-xs font-bold transition-all ${isActive
+                                ? "border-stone-900 bg-amber-300 text-stone-900 shadow-[2px_2px_0px_#1c1917]"
+                                : "border-transparent text-stone-600 hover:border-stone-900 hover:bg-white hover:text-stone-900"
                                 }`}
                         >
-                            <Icon className="h-4 w-4" strokeWidth={1.8} />
+                            <Icon className="h-4 w-4" strokeWidth={2.2} />
                             <span>{item.label}</span>
                         </Link>
                     );

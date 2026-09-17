@@ -43,17 +43,17 @@ export function TaskRow({
   > = {
     LOW: {
       label: "Low",
-      badge: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      badge: "bg-emerald-100 text-emerald-900 border-2 border-stone-900",
       dot: "bg-emerald-500",
     },
     MEDIUM: {
       label: "Medium",
-      badge: "bg-amber-50 text-amber-700 border-amber-100",
+      badge: "bg-amber-100 text-amber-900 border-2 border-stone-900",
       dot: "bg-amber-500",
     },
     HIGH: {
       label: "High",
-      badge: "bg-rose-50 text-rose-700 border-rose-100",
+      badge: "bg-rose-100 text-rose-900 border-2 border-stone-900",
       dot: "bg-rose-500",
     },
   };
@@ -120,32 +120,29 @@ export function TaskRow({
 
   return (
     <div
-      className={`group relative flex items-start gap-3.5 p-3.5 sm:px-4 sm:py-3.5 bg-white border border-stone-200/80 rounded-xl transition-all hover:border-stone-300 hover:shadow-xs ${menuOpen
-          ? "z-30"
-          : "z-0"
-        } ${task.completed ? "bg-stone-50/60 opacity-70" : ""
-        }`}
+      className={`group relative flex items-start gap-4 p-4 sm:px-5 sm:py-4 bg-white border-2 border-stone-900 rounded-xl transition-all shadow-[3px_3px_0px_#1c1917] hover:shadow-[5px_5px_0px_#1c1917] hover:-translate-x-0.5 hover:-translate-y-0.5 ${menuOpen ? "z-30" : "z-0"
+        } ${task.completed ? "bg-stone-100/90 opacity-80" : ""}`}
     >
       {/* Completion Checkbox */}
       <button
         type="button"
         onClick={() => onToggleComplete(task.id, task.completed)}
         aria-label={task.completed ? "Mark incomplete" : "Mark complete"}
-        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-all ${task.completed
-          ? "border-emerald-600 bg-emerald-600 text-white"
-          : "border-stone-300 bg-white hover:border-stone-400 focus:ring-2 focus:ring-stone-400 focus:ring-offset-1"
+        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-stone-900 transition-all ${task.completed
+          ? "bg-emerald-400 text-stone-900 shadow-[1px_1px_0px_#1c1917]"
+          : "bg-white hover:bg-amber-100 hover:shadow-[1px_1px_0px_#1c1917]"
           }`}
       >
-        {task.completed && <Check className="h-3 w-3 stroke-[3]" />}
+        {task.completed && <Check className="h-3.5 w-3.5 stroke-[3.5]" />}
       </button>
 
       {/* Task Content */}
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2.5 flex-wrap">
           <span
-            className={`text-sm font-medium tracking-tight transition-all break-words ${task.completed
-              ? "text-stone-400 line-through font-normal"
-              : "text-stone-800"
+            className={`text-sm sm:text-base font-bold tracking-tight transition-all break-words ${task.completed
+              ? "text-stone-400 line-through font-medium"
+              : "text-stone-900"
               }`}
           >
             {task.title}
@@ -153,10 +150,10 @@ export function TaskRow({
 
           {/* Priority Badge */}
           <span
-            className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium border ${priorityStyles[task.priority].badge}`}
+            className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${priorityStyles[task.priority].badge}`}
           >
             <span
-              className={`w-1.5 h-1.5 rounded-full ${priorityStyles[task.priority].dot}`}
+              className={`w-1.5 h-1.5 rounded-full border border-stone-900 ${priorityStyles[task.priority].dot}`}
             />
             {priorityStyles[task.priority].label}
           </span>
@@ -165,7 +162,7 @@ export function TaskRow({
         {/* Description Preview */}
         {task.description && (
           <p
-            className={`mt-1 text-xs text-stone-500 line-clamp-1 break-words ${task.completed ? "text-stone-400" : ""
+            className={`mt-1 text-xs text-stone-600 line-clamp-2 break-words font-medium ${task.completed ? "text-stone-400 line-through" : ""
               }`}
           >
             {task.description}
@@ -174,29 +171,18 @@ export function TaskRow({
 
         {/* Due Date Indicator */}
         {dueInfo && (
-          <div className="mt-2 flex items-center gap-1 text-[11px]">
-            <Calendar
-              className={`w-3 h-3 ${task.completed
-                ? "text-stone-400"
-                : dueInfo.isOverdue
-                  ? "text-rose-500"
-                  : dueInfo.isToday
-                    ? "text-amber-600"
-                    : "text-stone-400"
-                }`}
-            />
-
+          <div className="mt-2.5 flex items-center gap-1.5 text-[11px] font-bold">
             <span
-              className={
-                task.completed
-                  ? "text-stone-400"
-                  : dueInfo.isOverdue
-                    ? "text-rose-600 font-medium"
-                    : dueInfo.isToday
-                      ? "text-amber-700 font-medium"
-                      : "text-stone-500"
-              }
+              className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md border-2 border-stone-900 ${task.completed
+                ? "bg-stone-200 text-stone-500"
+                : dueInfo.isOverdue
+                  ? "bg-rose-200 text-rose-900 shadow-[1px_1px_0px_#1c1917]"
+                  : dueInfo.isToday
+                    ? "bg-amber-200 text-amber-900 shadow-[1px_1px_0px_#1c1917]"
+                    : "bg-stone-100 text-stone-700"
+                }`}
             >
+              <Calendar className="w-3 h-3 stroke-[2.5]" />
               {dueInfo.text}
             </span>
           </div>
@@ -208,14 +194,14 @@ export function TaskRow({
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          className="p-1 rounded-md text-stone-400 hover:text-stone-600 hover:bg-stone-100 transition-colors"
+          className="p-1.5 rounded-lg border-2 border-transparent text-stone-600 hover:border-stone-900 hover:bg-amber-100 hover:text-stone-900 hover:shadow-[2px_2px_0px_#1c1917] transition-all"
           aria-label="Task options"
         >
-          <MoreVertical className="w-4 h-4" />
+          <MoreVertical className="w-4 h-4 stroke-[2.5]" />
         </button>
 
         {menuOpen && (
-          <div className="absolute right-0 top-full mt-1 w-36 rounded-lg bg-white shadow-lg border border-stone-100 py-1 z-20 text-xs text-stone-700">
+          <div className="absolute right-0 top-full mt-1.5 w-40 rounded-xl bg-white border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917] py-1.5 z-20 text-xs font-bold text-stone-900 overflow-hidden">
             {/* Complete / Incomplete */}
             <button
               type="button"
@@ -223,9 +209,9 @@ export function TaskRow({
                 setMenuOpen(false);
                 onToggleComplete(task.id, task.completed);
               }}
-              className="flex w-full items-center gap-2 px-3 py-1.5 hover:bg-stone-50 text-stone-700 transition-colors"
+              className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-amber-100 text-stone-900 transition-colors"
             >
-              <Check className="w-3.5 h-3.5 text-stone-400" />
+              <Check className="w-4 h-4 stroke-[2.5] text-stone-700" />
               {task.completed ? "Mark incomplete" : "Mark complete"}
             </button>
 
@@ -236,11 +222,13 @@ export function TaskRow({
                 setMenuOpen(false);
                 onEdit(task);
               }}
-              className="flex w-full items-center gap-2 px-3 py-1.5 hover:bg-stone-50 text-stone-700 transition-colors"
+              className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-amber-100 text-stone-900 transition-colors"
             >
-              <Pencil className="w-3.5 h-3.5 text-stone-400" />
+              <Pencil className="w-4 h-4 stroke-[2.5] text-stone-700" />
               Edit
             </button>
+
+            <div className="my-1 border-t-2 border-stone-900" />
 
             {/* Delete */}
             <button
@@ -249,9 +237,9 @@ export function TaskRow({
                 setMenuOpen(false);
                 onDelete(task.id);
               }}
-              className="flex w-full items-center gap-2 px-3 py-1.5 hover:bg-rose-50 text-rose-600 transition-colors"
+              className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-rose-100 text-rose-700 transition-colors"
             >
-              <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+              <Trash2 className="w-4 h-4 stroke-[2.5] text-rose-600" />
               Delete
             </button>
           </div>

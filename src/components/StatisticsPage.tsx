@@ -119,22 +119,22 @@ export function StatisticsPage() {
     };
 
     return (
-        <div className="relative z-10 min-h-screen text-stone-900">
+        <div className="relative z-10 min-h-screen text-stone-900 selection:bg-amber-300">
             <AppNavigation />
             <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6">
                 {/* Header */}
-                <div className="mb-8">
-                    <div className="flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-stone-900 text-white">
-                            <BarChart3 className="h-4 w-4" strokeWidth={1.8} />
+                <div className="mb-8 bg-white p-5 rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917]">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-300 border-2 border-stone-900 text-stone-900 shadow-[2px_2px_0px_#1c1917]">
+                            <BarChart3 className="h-5 w-5 stroke-[2.5]" />
                         </div>
 
                         <div>
-                            <h1 className="text-xl font-bold tracking-tight text-stone-900">
-                                Statistics
+                            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-stone-900">
+                                Productivity Overview
                             </h1>
-                            <p className="mt-0.5 text-xs text-stone-500">
-                                A simple view of your task progress.
+                            <p className="mt-0.5 text-xs font-bold text-stone-600 uppercase tracking-wider">
+                                Task metrics and progress breakdown
                             </p>
                         </div>
                     </div>
@@ -142,79 +142,79 @@ export function StatisticsPage() {
 
                 {/* Error */}
                 {error && (
-                    <div className="mb-5 flex items-center justify-between rounded-xl border border-rose-100 bg-rose-50 p-3.5 text-xs text-rose-700">
-                        <div className="flex items-center gap-2">
-                            <AlertCircle className="h-4 w-4 shrink-0" />
+                    <div className="mb-6 flex items-center justify-between rounded-2xl border-2 border-stone-900 bg-rose-100 p-4 text-xs font-bold text-rose-900 shadow-[3px_3px_0px_#1c1917]">
+                        <div className="flex items-center gap-2.5">
+                            <AlertCircle className="h-5 w-5 shrink-0 stroke-[2.5]" />
                             <span>{error}</span>
                         </div>
 
                         <button
                             type="button"
                             onClick={loadTasks}
-                            className="inline-flex items-center gap-1 font-medium underline hover:text-rose-900"
+                            className="inline-flex items-center gap-1.5 font-black uppercase underline hover:text-rose-950"
                         >
-                            <RefreshCw className="h-3 w-3" />
+                            <RefreshCw className="h-3.5 w-3.5 stroke-[2.5]" />
                             Retry
                         </button>
                     </div>
                 )}
 
                 {isLoading ? (
-                    <div className="py-20 text-center">
-                        <RefreshCw className="mx-auto h-5 w-5 animate-spin text-stone-400" />
-                        <p className="mt-3 text-xs text-stone-500">
-                            Loading your statistics...
+                    <div className="py-20 text-center bg-white/80 rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_#1c1917]">
+                        <RefreshCw className="mx-auto h-6 w-6 animate-spin text-stone-900 stroke-[2.5]" />
+                        <p className="mt-3 text-xs font-bold uppercase tracking-wider text-stone-600">
+                            Loading statistics...
                         </p>
                     </div>
                 ) : (
                     <>
                         {/* Overview */}
                         <section className="mb-6">
-                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                                <div className="rounded-xl border border-stone-200/80 bg-white p-4">
-                                    <div className="mb-2 flex items-center gap-1.5 text-stone-500">
-                                        <BarChart3 className="h-3.5 w-3.5" />
-                                        <span className="text-[10px] font-medium uppercase tracking-wider">
+                            <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+                                <div className="rounded-2xl border-2 border-stone-900 bg-white p-4 shadow-[4px_4px_0px_#1c1917]">
+                                    <div className="mb-2 flex items-center gap-1.5 text-stone-700">
+                                        <BarChart3 className="h-4 w-4 stroke-[2.5]" />
+                                        <span className="text-[10px] font-black uppercase tracking-wider">
                                             Total
                                         </span>
                                     </div>
-                                    <p className="text-2xl font-bold text-stone-900">
+                                    <p className="text-3xl font-black text-stone-900">
                                         {statistics.total}
                                     </p>
                                 </div>
 
-                                <div className="rounded-xl border border-stone-200/80 bg-white p-4">
-                                    <div className="mb-2 flex items-center gap-1.5 text-amber-600">
-                                        <Clock className="h-3.5 w-3.5" />
-                                        <span className="text-[10px] font-medium uppercase tracking-wider">
+                                <div className="rounded-2xl border-2 border-stone-900 bg-amber-50 p-4 shadow-[4px_4px_0px_#1c1917]">
+                                    <div className="mb-2 flex items-center gap-1.5 text-amber-900">
+                                        <Clock className="h-4 w-4 stroke-[2.5]" />
+                                        <span className="text-[10px] font-black uppercase tracking-wider">
                                             Pending
                                         </span>
                                     </div>
-                                    <p className="text-2xl font-bold text-stone-900">
+                                    <p className="text-3xl font-black text-stone-900">
                                         {statistics.pending}
                                     </p>
                                 </div>
 
-                                <div className="rounded-xl border border-stone-200/80 bg-white p-4">
-                                    <div className="mb-2 flex items-center gap-1.5 text-emerald-600">
-                                        <CheckCircle2 className="h-3.5 w-3.5" />
-                                        <span className="text-[10px] font-medium uppercase tracking-wider">
+                                <div className="rounded-2xl border-2 border-stone-900 bg-emerald-50 p-4 shadow-[4px_4px_0px_#1c1917]">
+                                    <div className="mb-2 flex items-center gap-1.5 text-emerald-900">
+                                        <CheckCircle2 className="h-4 w-4 stroke-[2.5]" />
+                                        <span className="text-[10px] font-black uppercase tracking-wider">
                                             Completed
                                         </span>
                                     </div>
-                                    <p className="text-2xl font-bold text-stone-900">
+                                    <p className="text-3xl font-black text-stone-900">
                                         {statistics.completed}
                                     </p>
                                 </div>
 
-                                <div className="rounded-xl border border-stone-200/80 bg-white p-4">
-                                    <div className="mb-2 flex items-center gap-1.5 text-stone-500">
-                                        <Flag className="h-3.5 w-3.5" />
-                                        <span className="text-[10px] font-medium uppercase tracking-wider">
-                                            Completion
+                                <div className="rounded-2xl border-2 border-stone-900 bg-amber-300 p-4 shadow-[4px_4px_0px_#1c1917]">
+                                    <div className="mb-2 flex items-center gap-1.5 text-stone-900">
+                                        <Flag className="h-4 w-4 stroke-[2.5]" />
+                                        <span className="text-[10px] font-black uppercase tracking-wider">
+                                            Rate
                                         </span>
                                     </div>
-                                    <p className="text-2xl font-bold text-stone-900">
+                                    <p className="text-3xl font-black text-stone-900">
                                         {statistics.completionRate}%
                                     </p>
                                 </div>
@@ -222,25 +222,25 @@ export function StatisticsPage() {
                         </section>
 
                         {/* Completion Progress */}
-                        <section className="mb-6 rounded-xl border border-stone-200/80 bg-white p-5">
+                        <section className="mb-6 rounded-2xl border-2 border-stone-900 bg-white p-5 shadow-[4px_4px_0px_#1c1917]">
                             <div className="mb-3 flex items-center justify-between">
                                 <div>
-                                    <h2 className="text-sm font-semibold text-stone-900">
-                                        Completion Progress
+                                    <h2 className="text-sm font-black uppercase tracking-wider text-stone-900">
+                                        Completion Rate
                                     </h2>
-                                    <p className="mt-0.5 text-xs text-stone-500">
+                                    <p className="mt-0.5 text-xs font-medium text-stone-600">
                                         {statistics.completed} of {statistics.total} tasks completed
                                     </p>
                                 </div>
 
-                                <span className="text-sm font-semibold text-stone-900">
+                                <span className="text-lg font-black text-stone-900 bg-amber-300 px-2.5 py-0.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_#1c1917]">
                                     {statistics.completionRate}%
                                 </span>
                             </div>
 
-                            <div className="h-2 overflow-hidden rounded-full bg-stone-100">
+                            <div className="h-4 overflow-hidden rounded-xl bg-stone-200 border-2 border-stone-900 shadow-[inset_1px_1px_0px_#1c1917]">
                                 <div
-                                    className="h-full rounded-full bg-stone-900 transition-all duration-500"
+                                    className="h-full bg-emerald-400 border-r-2 border-stone-900 transition-all duration-500"
                                     style={{ width: `${statistics.completionRate}%` }}
                                 />
                             </div>
@@ -248,43 +248,46 @@ export function StatisticsPage() {
 
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             {/* Priority */}
-                            <section className="rounded-xl border border-stone-200/80 bg-white p-5">
-                                <h2 className="text-sm font-semibold text-stone-900">
-                                    Priority
+                            <section className="rounded-2xl border-2 border-stone-900 bg-white p-5 shadow-[4px_4px_0px_#1c1917]">
+                                <h2 className="text-sm font-black uppercase tracking-wider text-stone-900">
+                                    Priority Breakdown
                                 </h2>
-                                <p className="mt-0.5 text-xs text-stone-500">
+                                <p className="mt-0.5 text-xs font-medium text-stone-600">
                                     Distribution across your tasks.
                                 </p>
 
                                 <div className="mt-5 space-y-4">
                                     {[
                                         {
-                                            label: "High",
+                                            label: "High Priority",
                                             count: statistics.high,
-                                            bar: "bg-rose-500",
+                                            bar: "bg-rose-400",
+                                            badge: "bg-rose-100 text-rose-900",
                                         },
                                         {
-                                            label: "Medium",
+                                            label: "Medium Priority",
                                             count: statistics.medium,
-                                            bar: "bg-amber-500",
+                                            bar: "bg-amber-400",
+                                            badge: "bg-amber-100 text-amber-900",
                                         },
                                         {
-                                            label: "Low",
+                                            label: "Low Priority",
                                             count: statistics.low,
-                                            bar: "bg-emerald-600",
+                                            bar: "bg-emerald-400",
+                                            badge: "bg-emerald-100 text-emerald-900",
                                         },
                                     ].map((item) => (
                                         <div key={item.label}>
-                                            <div className="mb-1.5 flex items-center justify-between text-xs">
-                                                <span className="text-stone-600">{item.label}</span>
-                                                <span className="font-medium text-stone-900">
+                                            <div className="mb-1.5 flex items-center justify-between text-xs font-bold">
+                                                <span className="text-stone-800">{item.label}</span>
+                                                <span className={`px-2 py-0.5 rounded-md border-2 border-stone-900 text-[10px] font-black ${item.badge}`}>
                                                     {item.count}
                                                 </span>
                                             </div>
 
-                                            <div className="h-1.5 overflow-hidden rounded-full bg-stone-100">
+                                            <div className="h-3 overflow-hidden rounded-lg bg-stone-200 border-2 border-stone-900 shadow-[inset_1px_1px_0px_#1c1917]">
                                                 <div
-                                                    className={`h-full rounded-full ${item.bar}`}
+                                                    className={`h-full border-r-2 border-stone-900 ${item.bar}`}
                                                     style={{
                                                         width: getPriorityWidth(item.count),
                                                     }}
@@ -296,41 +299,41 @@ export function StatisticsPage() {
                             </section>
 
                             {/* Due Dates */}
-                            <section className="rounded-xl border border-stone-200/80 bg-white p-5">
-                                <h2 className="text-sm font-semibold text-stone-900">
-                                    Due Dates
+                            <section className="rounded-2xl border-2 border-stone-900 bg-white p-5 shadow-[4px_4px_0px_#1c1917]">
+                                <h2 className="text-sm font-black uppercase tracking-wider text-stone-900">
+                                    Upcoming Deadlines
                                 </h2>
-                                <p className="mt-0.5 text-xs text-stone-500">
-                                    Overview of your unfinished deadlines.
+                                <p className="mt-0.5 text-xs font-medium text-stone-600">
+                                    Overview of your pending tasks.
                                 </p>
 
-                                <div className="mt-4 divide-y divide-stone-100">
+                                <div className="mt-4 divide-y-2 divide-stone-900/10">
                                     <div className="flex items-center justify-between py-2.5">
-                                        <span className="text-xs text-stone-600">Overdue</span>
-                                        <span className="text-xs font-semibold text-rose-600">
+                                        <span className="text-xs font-bold text-stone-700">Overdue</span>
+                                        <span className="px-2 py-0.5 rounded-md border-2 border-stone-900 bg-rose-200 text-rose-900 text-xs font-black shadow-[1px_1px_0px_#1c1917]">
                                             {statistics.overdue}
                                         </span>
                                     </div>
 
                                     <div className="flex items-center justify-between py-2.5">
-                                        <span className="text-xs text-stone-600">Due today</span>
-                                        <span className="text-xs font-semibold text-amber-600">
+                                        <span className="text-xs font-bold text-stone-700">Due Today</span>
+                                        <span className="px-2 py-0.5 rounded-md border-2 border-stone-900 bg-amber-200 text-amber-900 text-xs font-black shadow-[1px_1px_0px_#1c1917]">
                                             {statistics.dueToday}
                                         </span>
                                     </div>
 
                                     <div className="flex items-center justify-between py-2.5">
-                                        <span className="text-xs text-stone-600">Upcoming</span>
-                                        <span className="text-xs font-semibold text-stone-900">
+                                        <span className="text-xs font-bold text-stone-700">Upcoming</span>
+                                        <span className="px-2 py-0.5 rounded-md border-2 border-stone-900 bg-stone-100 text-stone-900 text-xs font-black">
                                             {statistics.upcoming}
                                         </span>
                                     </div>
 
                                     <div className="flex items-center justify-between py-2.5">
-                                        <span className="text-xs text-stone-600">
-                                            No due date
+                                        <span className="text-xs font-bold text-stone-700">
+                                            No Due Date
                                         </span>
-                                        <span className="text-xs font-semibold text-stone-900">
+                                        <span className="px-2 py-0.5 rounded-md border-2 border-stone-900 bg-stone-100 text-stone-900 text-xs font-black">
                                             {statistics.noDueDate}
                                         </span>
                                     </div>
