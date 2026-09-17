@@ -235,9 +235,9 @@ Prisma Client is generated during installation so deployments work correctly wit
 
 ## AI Usage Disclosure
 
-AI tools were used during development for UI implementation/refinement, debugging assistance, development guidance, and deployment troubleshooting.
+AI tools were used during development for UI refinement, debugging assistance, and deployment troubleshooting.
 
-The application's core functionality, authentication, task CRUD, database persistence, validation, guest-to-authenticated migration, and production flows were manually tested before submission.
+The application's core functionality, authentication, task CRUD, database persistence, validation, guest-to-authenticated migration, UI structure and production flows were manually developed & tested before submission.
 
 ---
 
