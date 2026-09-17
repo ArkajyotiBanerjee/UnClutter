@@ -1,36 +1,247 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UnClutter
+
+UnClutter is a full-stack student task management application designed to help students organize, track, and complete their daily tasks without unnecessary complexity.
+
+It supports both guest usage through browser storage and authenticated usage with persistent PostgreSQL storage.
+
+## Live Demo
+
+https://unclutter-app-nine.vercel.app
+
+## GitHub Repository
+
+https://github.com/ArkajyotiBanerjee/UnClutter
+
+---
+
+## Features
+
+- Create, edit, delete, and complete tasks
+- Task descriptions, priorities, and due dates
+- All / Pending / Completed task views
+- Search and priority filtering
+- Guest mode using browser `localStorage`
+- Google authentication
+- PostgreSQL persistence for authenticated users
+- Guest task migration after Google sign-in
+- Statistics dashboard with completion and priority breakdowns
+- Responsive Neo-Brutalist UI
+- Loading, empty, validation, and error states
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- Lucide React
+
+**Backend & Data**
+- Next.js Route Handlers
+- NextAuth.js
+- Prisma ORM
+- PostgreSQL
+- Neon
+
+**Validation & Deployment**
+- Zod
+- Vercel
+- GitHub
+
+---
+
+## Architecture
+
+UnClutter uses a single Next.js application containing the frontend and backend API routes.
+
+```text
+                    ┌─────────────────────┐
+                    │     Next.js App     │
+                    │ React + TypeScript  │
+                    └──────────┬──────────┘
+                               │
+                ┌──────────────┴──────────────┐
+                │                             │
+             Guest                      Authenticated
+                │                             │
+                ▼                             ▼
+          localStorage                   NextAuth.js
+                                              │
+                                              ▼
+                                         Task API
+                                              │
+                                              ▼
+                                            Prisma
+                                              │
+                                              ▼
+                                       PostgreSQL / Neon
+````
+
+### Guest → Authenticated Migration
+
+Guest tasks stored in `localStorage` are migrated to the authenticated user's PostgreSQL account when they sign in with Google.
+
+---
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── api/
+│   │   ├── auth/[...nextauth]/
+│   │   └── tasks/
+│   ├── statistics/
+│   └── page.tsx
+│
+├── components/
+│   ├── AppNavigation.tsx
+│   ├── BackgroundLayer.tsx
+│   ├── StatisticsPage.tsx
+│   ├── TaskModal.tsx
+│   ├── TaskRow.tsx
+│   └── UnClutterApp.tsx
+│
+├── lib/
+│   ├── auth.ts
+│   ├── guestStorage.ts
+│   ├── prisma.ts
+│   ├── taskApi.ts
+│   └── validations/task.ts
+│
+└── types/
+
+prisma/
+├── migrations/
+└── schema.prisma
+```
+
+---
+
+## API
+
+| Method | Endpoint         | Purpose                          |
+| ------ | ---------------- | -------------------------------- |
+| GET    | `/api/tasks`     | Fetch authenticated user's tasks |
+| POST   | `/api/tasks`     | Create a task                    |
+| PATCH  | `/api/tasks/:id` | Update a task                    |
+| DELETE | `/api/tasks/:id` | Delete a task                    |
+
+The API validates task input with Zod and checks authentication and task ownership before modifying data.
+
+---
+
+## Validation & Error Handling
+
+The application handles:
+
+* Invalid or missing task titles
+* Invalid task data and dates
+* Unauthorized API requests
+* Access to another user's tasks
+* Failed API operations
+* Loading and empty states
+
+New tasks can only have a due date of today or later.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone and install
+
+```bash
+git clone https://github.com/ArkajyotiBanerjee/UnClutter.git
+cd UnClutter
+npm install
+```
+
+### 2. Configure environment variables
+
+Create `.env` in the project root:
+
+```env
+DATABASE_URL="your-postgresql-connection-string"
+NEXTAUTH_SECRET="your-nextauth-secret"
+NEXTAUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+```
+
+### 3. Set up Prisma
+
+```bash
+npx prisma generate
+npx prisma migrate deploy
+```
+
+### 4. Start the application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Google OAuth
 
-## Learn More
+For local development:
 
-To learn more about Next.js, take a look at the following resources:
+**Authorized JavaScript origin**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Authorized redirect URI**
 
-## Deploy on Vercel
+```text
+http://localhost:3000/api/auth/callback/google
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For production, use:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+https://unclutter-app-nine.vercel.app
+https://unclutter-app-nine.vercel.app/api/auth/callback/google
+```
+
+---
+
+## Deployment
+
+The application is deployed on Vercel and connected to GitHub.
+
+Production environment variables:
+
+```text
+DATABASE_URL
+NEXTAUTH_SECRET
+NEXTAUTH_URL
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+```
+
+Prisma Client is generated during installation so deployments work correctly with Vercel's dependency caching.
+
+**Live:** [https://unclutter-app-nine.vercel.app](https://unclutter-app-nine.vercel.app)
+
+---
+
+## AI Usage Disclosure
+
+AI tools were used during development for UI implementation/refinement, debugging assistance, development guidance, and deployment troubleshooting.
+
+The application's core functionality, authentication, task CRUD, database persistence, validation, guest-to-authenticated migration, and production flows were manually tested before submission.
+
+---
+
+## License
+
+Created as part of a Full Stack Developer internship assignment.
+
